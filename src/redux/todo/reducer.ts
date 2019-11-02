@@ -12,7 +12,7 @@ export const initialToDoListState: ToDoList = {
   isFetching: false,
 };
 
-const todoList = (
+const toDoList = (
   state: ToDoList = initialToDoListState,
   action: ToDoListActions,
 ): ToDoList => {
@@ -28,7 +28,7 @@ const todoList = (
         isFetching: false,
       };
     case TODO_LIST_SUCCEEDED: {
-      const { todoList: items } = action;
+      const { toDoList: items } = action;
 
       return {
         ...state,
@@ -41,4 +41,4 @@ const todoList = (
   }
 };
 
-export default todoList;
+export default toDoList;

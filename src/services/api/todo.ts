@@ -5,7 +5,7 @@ const API = createInstance();
 
 export const getToDoList = () => API
   .get('/todos')
-  .then(({ data: { todoList } }: any): Array<ToDoItem> => todoList)
+  .then(({ data: { toDoList } }: any): Array<ToDoItem> => toDoList)
   .catch((error: any) => {
     throw error;
   });

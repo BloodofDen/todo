@@ -8,7 +8,7 @@ interface ToDoListRequested {
 export const TODO_LIST_SUCCEEDED = 'TODO_LIST_SUCCEEDED';
 interface ToDoListSucceeded {
   type: typeof TODO_LIST_SUCCEEDED,
-  todoList: Array<ToDoItem>,
+  toDoList: Array<ToDoItem>,
 }
 
 export const TODO_LIST_FAILED = 'TODO_LIST_FAILED';

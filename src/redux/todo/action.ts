@@ -14,7 +14,7 @@ export const ACTION_TODO_LIST_REQUESTED = () => ({
   type: TODO_LIST_REQUESTED,
 });
 
-export const ACTION_TODO_LIST_SUCCEEDED = (todoList: Array<ToDoItem>) => ({
+export const ACTION_TODO_LIST_SUCCEEDED = (toDoList: Array<ToDoItem>) => ({
   type: TODO_LIST_SUCCEEDED,
-  todoList,
+  toDoList,
 });

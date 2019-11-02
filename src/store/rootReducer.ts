@@ -1,5 +1,5 @@
-import todoList from '../redux/todo/reducer';
+import toDoList from '../redux/todo/reducer';
 
 export default {
-  todoList,
+  toDoList,
 };
