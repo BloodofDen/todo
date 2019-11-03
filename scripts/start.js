@@ -1,4 +1,4 @@
-'use strict';
+
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'development';
@@ -58,7 +58,6 @@ if (process.env.HOST) {
   console.log(
     `Learn more here: ${chalk.yellow('https://bit.ly/CRA-advanced-config')}`
   );
-  console.log();
 }
 
 // We require that you explicitly set browsers and do not fall back to

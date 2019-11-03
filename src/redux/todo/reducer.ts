@@ -5,6 +5,10 @@ import {
   TODO_LIST_FAILED,
   TODO_LIST_REQUESTED,
   TODO_LIST_SUCCEEDED,
+  ADD_TODO_ITEM_REQUESTED,
+  ADD_TODO_ITEM_FULFILLED,
+  EDIT_TODO_ITEM_REQUESTED,
+  DELETE_TODO_ITEM_REQUESTED,
 } from './types';
 
 export const initialToDoListState: ToDoList = {
@@ -34,6 +38,59 @@ const toDoList = (
         ...state,
         items,
         isFetching: false,
+      };
+    }
+    case ADD_TODO_ITEM_REQUESTED: {
+      const { newToDoItem } = action;
+      const { items, ...restState } = state;
+
+      return {
+        ...restState,
+        items: [
+          newToDoItem,
+          ...items,
+        ],
+      };
+    }
+    case ADD_TODO_ITEM_FULFILLED: {
+      const { index, newId } = action;
+      const { items, ...restState } = state;
+
+      return {
+        ...restState,
+        items: [
+          ...items.slice(0, index),
+          {
+            ...items[index],
+            id: newId,
+          },
+          ...items.slice(index + 1),
+        ],
+      };
+    }
+    case EDIT_TODO_ITEM_REQUESTED: {
+      const { index, updatedToDoItem } = action;
+      const { items, ...restState } = state;
+
+      return {
+        ...restState,
+        items: [
+          ...items.slice(0, index),
+          updatedToDoItem,
+          ...items.slice(index + 1),
+        ],
+      };
+    }
+    case DELETE_TODO_ITEM_REQUESTED: {
+      const { index } = action;
+      const { items, ...restState } = state;
+
+      return {
+        ...restState,
+        items: [
+          ...items.slice(0, index),
+          ...items.slice(index + 1),
+        ],
       };
     }
     default:
