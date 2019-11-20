@@ -26,10 +26,6 @@ export const Heading = styled.h1`
   margin: 1rem;
 `;
 
-export const OrderPoint = styled.p`
-  margin-right: 10px;
-`;
-
 const styles = () => ({
   textField: {
     padding: '0 15px',

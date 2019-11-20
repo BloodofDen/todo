@@ -58,13 +58,13 @@ export const ACTION_EDIT_TODO_ITEM_REQUESTED = (updatedToDoItem: ToDoItem) => {
   };
 };
 
-export const ACTION_DELETE_TODO_ITEM_REQUESTED = (toDoItemId: number) => {
+export const ACTION_DELETE_TODO_ITEM_REQUESTED = (itemId: number) => {
   const { toDoList: { items: todos } } = store.getState();
-  const index = todos.findIndex(todo => todo.id === toDoItemId);
+  const index = todos.findIndex(todo => todo.id === itemId);
 
   return {
     type: DELETE_TODO_ITEM_REQUESTED,
     index,
-    toDoItemId,
+    itemId,
   };
 };

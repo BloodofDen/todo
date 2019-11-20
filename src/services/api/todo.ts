@@ -15,7 +15,7 @@ export const getToDoList = () => API
 export const addToDoItem = (newToDoItem: ToDoItem) => API
   .post(
     '/todos',
-    { data: toDoItemToServer(newToDoItem) },
+    toDoItemToServer(newToDoItem),
   )
   .then(({ data: newId }: any): number => newId)
   .catch((error: any) => {
@@ -25,14 +25,14 @@ export const addToDoItem = (newToDoItem: ToDoItem) => API
 export const editToDoItem = (updatedToDoItem: ToDoItem) => API
   .put(
     `/todos/${updatedToDoItem.id}`,
-    { data: toDoItemToServer(updatedToDoItem) },
+    toDoItemToServer(updatedToDoItem),
   )
   .catch((error: any) => {
     throw error;
   });
 
-export const deleteToDoItem = (toDoItemId: number) => API
-  .delete(`/todos/${toDoItemId}`)
+export const deleteToDoItem = (itemId: number) => API
+  .delete(`/todos/${itemId}`)
   .catch((error: any) => {
     throw error;
   });

@@ -20,7 +20,9 @@ const Root = (
   </Provider>
 );
 
-ReactDOM.render(Root, document.body);
+const MOUNT_NODE = document.getElementById('app') as HTMLElement;
+
+ReactDOM.render(Root, MOUNT_NODE);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

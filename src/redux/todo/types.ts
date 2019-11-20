@@ -40,7 +40,7 @@ export const DELETE_TODO_ITEM_REQUESTED = 'DELETE_TODO_ITEM_REQUESTED';
 export interface DeleteToDoItemRequested {
   type: typeof DELETE_TODO_ITEM_REQUESTED,
   index: number,
-  toDoItemId: number,
+  itemId: number,
 }
 
 export type ToDoListActions = ToDoListRequested |

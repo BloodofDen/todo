@@ -66,7 +66,7 @@ function* editToDoItemSaga(action: EditToDoItemFulfilled) {
 
 function* deleteToDoItemSaga(action: DeleteToDoItemRequested) {
   try {
-    yield call(deleteToDoItem, action.toDoItemId);
+    yield call(deleteToDoItem, action.itemId);
   } catch (error) {
     const { response, message } = error;
     const errorMessage = response ? response.statusText : message;

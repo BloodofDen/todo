@@ -8,7 +8,7 @@ export interface IProps {
   ACTION_TODO_LIST_REQUESTED: () => void,
   ACTION_ADD_TODO_ITEM_REQUESTED: (text: string) => void,
   ACTION_EDIT_TODO_ITEM_REQUESTED: (updatedToDoItem: ToDoItem) => void,
-  ACTION_DELETE_TODO_ITEM_REQUESTED: (toDoItemId: number) => void,
+  ACTION_DELETE_TODO_ITEM_REQUESTED: (itemId: number) => void,
 };
 
 export interface IState {

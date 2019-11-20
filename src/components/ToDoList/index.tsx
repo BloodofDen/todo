@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {
-    TextField, List, ListItem, ListItemText,
-    ListItemIcon, ListItemSecondaryAction, Checkbox,
-    IconButton
-} from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
+import { TextField, List } from '@material-ui/core';
+
+import ToDoItem from './ToDoItem';
 
 import * as todoActions from '../../redux/todo/action';
 
@@ -15,11 +12,10 @@ import { ENTER_KEY } from './config';
 
 import { IProps, IState } from './types';
 import { Store } from '../../store/initialState';
-import { ToDoItem } from '../../models/todo'
+import { ToDoItem as ToDoItemType } from '../../models/todo'
 
 import styles, {
   ToDoListContainer, ToDoListWrapper, Heading,
-  OrderPoint,
 } from './styles';
 
 class ToDoList extends PureComponent<IProps, IState> {
@@ -54,9 +50,9 @@ class ToDoList extends PureComponent<IProps, IState> {
     }
   }
 
-  handleItemCheck = (toDoItemId: number) => {
+  handleItemCheck = (itemId: number) => {
     const { todos, ACTION_EDIT_TODO_ITEM_REQUESTED } = this.props;
-    const { isDone, ...restTodoItem } = todos.find(todo => todo.id === toDoItemId) as ToDoItem;
+    const { isDone, ...restTodoItem } = todos.find(todo => todo.id === itemId) as ToDoItemType;
 
     ACTION_EDIT_TODO_ITEM_REQUESTED({
       ...restTodoItem,
@@ -64,9 +60,9 @@ class ToDoList extends PureComponent<IProps, IState> {
     });
   }
 
-  handleDeleteItem = (toDoItemId: number) => {
+  handleItemDelete = (itemId: number) => {
     const { ACTION_DELETE_TODO_ITEM_REQUESTED } = this.props;
-    ACTION_DELETE_TODO_ITEM_REQUESTED(toDoItemId);
+    ACTION_DELETE_TODO_ITEM_REQUESTED(itemId);
   }
 
   render() {
@@ -95,35 +91,14 @@ class ToDoList extends PureComponent<IProps, IState> {
             onKeyDown={this.handleKeyPressed}
           />
           <List className={classes.list} dense>
-            {todos.map((todo: ToDoItem, index: number) => (
-              <ListItem
+            {todos.map((todo: ToDoItemType, index: number) => (
+              <ToDoItem
                 key={`${todo.id}`}
-                onClick={() => this.handleItemCheck(todo.id as number)}
-                disabled={typeof todo.id === 'string'}
-                button
-              >
-                <OrderPoint>{index + 1}.</OrderPoint>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="end"
-                    inputProps={{ 'aria-labelledby': `${todo.id}` }}
-                    checked={todo.isDone}
-                    onChange={() => this.handleItemCheck(todo.id as number)}
-                  />
-                </ListItemIcon>
-                <ListItemText id={`${todo.id}`} primary={todo.text} />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    title="Delete item"
-                    onClick={() => this.handleDeleteItem(todo.id as number)}
-                    disabled={typeof todo.id === 'string'}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+                item={todo}
+                order={index + 1}
+                onItemCheck={this.handleItemCheck}
+                onItemDelete={this.handleItemDelete}
+              />
             ))}
           </List>
         </ToDoListWrapper>
@@ -141,11 +116,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ACTION_ADD_TODO_ITEM_REQUESTED: (text: string) => {
     dispatch(todoActions.ACTION_ADD_TODO_ITEM_REQUESTED(text));
   },
-  ACTION_EDIT_TODO_ITEM_REQUESTED: (updatedToDoItem: ToDoItem) => {
+  ACTION_EDIT_TODO_ITEM_REQUESTED: (updatedToDoItem: ToDoItemType) => {
     dispatch(todoActions.ACTION_EDIT_TODO_ITEM_REQUESTED(updatedToDoItem));
   },
-  ACTION_DELETE_TODO_ITEM_REQUESTED: (toDoItemId: number) => {
-    dispatch(todoActions.ACTION_DELETE_TODO_ITEM_REQUESTED(toDoItemId));
+  ACTION_DELETE_TODO_ITEM_REQUESTED: (itemId: number) => {
+    dispatch(todoActions.ACTION_DELETE_TODO_ITEM_REQUESTED(itemId));
   },
 });
 
